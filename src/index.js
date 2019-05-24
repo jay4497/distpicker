@@ -22,9 +22,29 @@ if ($.fn) {
         }
 
         const options = $.extend({}, $element.data(), $.isPlainObject(option) && option);
-
-        distpicker = new Distpicker(element, options);
-        $element.data(NAMESPACE, distpicker);
+        const dataUrl = $element.attr('data-url');
+        if (dataUrl !== '' && dataUrl !== undefined) {
+          $.ajax({
+            url: dataUrl,
+            dataType: 'json',
+            success(res) {
+              const data = JSON.parse(res);
+              if (data.status === 0) {
+                options.districts = data.data;
+                distpicker = new Distpicker(element, options);
+                $element.data(NAMESPACE, distpicker);
+              } else {
+                console.log(data.message);
+              }
+            },
+            error(ex) {
+              console.log(ex);
+            },
+          });
+        } else {
+          distpicker = new Distpicker(element, options);
+          $element.data(NAMESPACE, distpicker);
+        }
       }
 
       if (typeof option === 'string') {

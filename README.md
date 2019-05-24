@@ -67,6 +67,16 @@ Basic
 </div>
 ```
 
+Custom districts data
+
+```html
+<div data-toggle="distpicker" data-url="https://district.com/get">
+  <select></select>
+  <select></select>
+  <select></select>
+</div>
+```
+
 Custom placeholders
 
 ```html

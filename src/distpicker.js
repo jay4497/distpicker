@@ -172,7 +172,8 @@ export default class Distpicker {
 
   // eslint-disable-next-line class-methods-use-this
   getDistricts(code = DEFAULT_CODE) {
-    return DISTRICTS[code] || null;
+    const districts = this.options.districts || DISTRICTS;
+    return districts[code] || null;
   }
 
   reset(deep) {

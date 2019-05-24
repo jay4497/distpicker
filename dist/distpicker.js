@@ -5,7 +5,7 @@
  * Copyright 2014-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2018-12-01T09:59:25.126Z
+ * Date: 2019-05-24T03:57:10.271Z
  */
 
 (function (global, factory) {
@@ -4344,7 +4344,8 @@
       key: "getDistricts",
       value: function getDistricts() {
         var code = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_CODE;
-        return DISTRICTS[code] || null;
+        var districts = this.options.districts || DISTRICTS;
+        return districts[code] || null;
       }
     }, {
       key: "reset",
@@ -4392,8 +4393,31 @@
           }
 
           var options = $.extend({}, $element.data(), $.isPlainObject(option) && option);
-          distpicker = new Distpicker(element, options);
-          $element.data(NAMESPACE, distpicker);
+          var dataUrl = $element.attr('data-url');
+
+          if (dataUrl !== '' && dataUrl !== undefined) {
+            $.ajax({
+              url: dataUrl,
+              dataType: 'json',
+              success: function success(res) {
+                var data = JSON.parse(res);
+
+                if (data.status === 0) {
+                  options.districts = data.data;
+                  distpicker = new Distpicker(element, options);
+                  $element.data(NAMESPACE, distpicker);
+                } else {
+                  console.log(data.message);
+                }
+              },
+              error: function error(ex) {
+                console.log(ex);
+              }
+            });
+          } else {
+            distpicker = new Distpicker(element, options);
+            $element.data(NAMESPACE, distpicker);
+          }
         }
 
         if (typeof option === 'string') {
