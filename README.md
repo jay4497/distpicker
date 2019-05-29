@@ -70,7 +70,7 @@ Basic
 Custom districts data
 
 ```html
-<div data-toggle="distpicker" data-url="https://district.com/get">
+<div data-toggle="distpicker" data-api="https://district.com/get">
   <select></select>
   <select></select>
   <select></select>
@@ -103,6 +103,14 @@ Basic
 
 ```js
 $('#target').distpicker();
+```
+
+Custom districts data
+
+```js
+$('#target').distpicker({
+  api: 'https://district.com/get'
+});
 ```
 
 Custom placeholders
