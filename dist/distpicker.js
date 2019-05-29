@@ -5,7 +5,7 @@
  * Copyright 2014-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2019-05-24T03:57:10.271Z
+ * Date: 2019-05-29T08:18:52.776Z
  */
 
 (function (global, factory) {
@@ -4393,11 +4393,11 @@
           }
 
           var options = $.extend({}, $element.data(), $.isPlainObject(option) && option);
-          var dataUrl = $element.attr('data-url');
+          var apiUrl = options.api;
 
-          if (dataUrl !== '' && dataUrl !== undefined) {
+          if (apiUrl !== '' && apiUrl !== undefined) {
             $.ajax({
-              url: dataUrl,
+              url: apiUrl,
               dataType: 'json',
               success: function success(res) {
                 var data = JSON.parse(res);

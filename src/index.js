@@ -22,10 +22,10 @@ if ($.fn) {
         }
 
         const options = $.extend({}, $element.data(), $.isPlainObject(option) && option);
-        const dataUrl = $element.attr('data-url');
-        if (dataUrl !== '' && dataUrl !== undefined) {
+        const apiUrl = options.api;
+        if (apiUrl !== '' && apiUrl !== undefined) {
           $.ajax({
-            url: dataUrl,
+            url: apiUrl,
             dataType: 'json',
             success(res) {
               const data = JSON.parse(res);
